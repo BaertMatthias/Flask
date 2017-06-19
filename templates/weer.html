@@ -18,15 +18,14 @@
         <div id="waardes">
             <div id="weertype">
                 {% if licht < 20 %}
-                    {{ macro }}
+                    {{ macro.build_figure(nacht.png,750) }}
                 {% elif licht < 50 %}
-                    {{ macro }}
+                    {{ macro.build_figure(zwaar_bewolkt.png,750) }}
                 {% elif licht < 75 %}
-                    {{ macro }}
+                    {{ macro.build_figure(bewolkt.png,750) }}
                 {% else %}
-                    {{ macro }}
+                    {{ macro.build_figure(zon.png,750) }}
                 {% endif %}
-                <img src="images/bewolkt.png" width="100px">
             </div>
             <img src="images/lucht.jpg" width="750px">
             <div id="tekst_waardes">

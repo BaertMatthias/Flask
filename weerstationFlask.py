@@ -3,6 +3,7 @@ from flask import render_template
 from DbClass import  DbClass
 import datetime
 import pygal
+import os
 
 app = Flask(__name__)
 
@@ -41,7 +42,9 @@ def weerstation():
     graph_data_h = graph_h.render_data_uri()
     graph_data_p = graph_p.render_data_uri()
     graph_data_l = graph_l.render_data_uri()
-    return render_template('weer.html',temperatuur=temperatuur, pressure=luchtdruk, humidity = luchtvochtigheid, licht=licht, tijdstip=tijdstip, graph_data_h=graph_data_h, graph_data_l=graph_data_l, graph_data_p=graph_data_p, graph_data_t=graph_data_t)
+    hoogsteT = max(temperaturen)
+    laagsteT = min(temperaturen)
+    return render_template('weer.html',temperatuur=temperatuur, pressure=luchtdruk, humidity = luchtvochtigheid, licht=licht, tijdstip=tijdstip, graph_data_h=graph_data_h, graph_data_l=graph_data_l, graph_data_p=graph_data_p, graph_data_t=graph_data_t, hoogsteT=hoogsteT, laagsteT=laagsteT)
 
 @app.errorhandler(404)
 def pagenotfound(error):
@@ -49,4 +52,6 @@ def pagenotfound(error):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT",8080))
+    host = "0.0.0.0"
+    app.run(host=host, port=port, debug=True)
