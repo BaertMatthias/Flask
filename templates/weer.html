@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}
+    Weer - Oudenaarde
+{% endblock %}
+
+{% block home %}
+    class="active"
+{% endblock %}
+
+{% block body %}
+     <header>
+        <h1>WEERSTATION</h1>
+    </header>
+    <div id="midden">
+        <div id="kaart">
+            <img src="images/kaart.jpg" width="500px">
+        </div>
+        <div id="waardes">
+            <div id="weertype">
+                {% if licht < 20 %}
+                    {{ macro }}
+                {% elif licht < 50 %}
+                    {{ macro }}
+                {% elif licht < 75 %}
+                    {{ macro }}
+                {% else %}
+                    {{ macro }}
+                {% endif %}
+                <img src="images/bewolkt.png" width="100px">
+            </div>
+            <img src="images/lucht.jpg" width="750px">
+            <div id="tekst_waardes">
+                <h2>Weerstation</h2>
+                <table border="1">
+                    <tr><td colspan="3">Oudenaarde - Oost-Vlaanderen</td></tr>
+                    <tr><td rowspan="2">Temperatuur</td><td rowspan="2">{{ temperatuur }}</td><td>Hoogste {{ hoogsteT }}</td></tr>
+                    <tr><td>Laagste {{ laagsteT }}</td></tr>
+                    <tr><td>Humidity</td><td colspan="2">{{ humidity }}</td></tr>
+                    <tr><td>Barometer</td><td colspan="2">{{ pressure }}hPa</td></tr>
+                    <tfoot><td colspan="3">Huidige omstandigheden om {{ tijdstip }}</td></tfoot>
+                </table>
+            </div>
+        </div>
+        <div id="grafiekt">
+            <embed type="image/svg+xml" src={{graph_data_t|safe}} style='max-width:750px'/>
+        </div>
+        <div id="grafiekh">
+            <embed type="image/svg+xml" src={{graph_data_h|safe}} style='max-width:750px'/>
+        </div>
+        <div id="grafiekl">
+            <embed type="image/svg+xml" src={{graph_data_l|safe}} style='max-width:750px'/>
+        </div>
+        <div id="grafiekp">
+            <embed type="image/svg+xml" src={{graph_data_p|safe}} style='max-width:750px'/>
+        </div>
+    </div>
+    <footer>
+        <div id="footer-left">
+            <p>Baert Matthias &copy; 2017</p>
+        </div>
+        <div id="footer-right">
+            {{ macro.build_figure(sc.jpg,250) }}
+        </div>
+    </footer>
+{% endblock %}

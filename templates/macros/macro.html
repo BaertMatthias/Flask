@@ -1,0 +1,8 @@
+{% macro build_figure(file,breedte) %}
+    <figure>
+        <img
+                src="{{ url_for("static",filename="images/" + file) }}"
+                width=breedte
+        >
+    </figure>
+{% endmacro %}
